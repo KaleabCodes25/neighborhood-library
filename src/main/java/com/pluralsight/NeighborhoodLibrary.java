@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class NeighborhoodLibrary {
     //private static int numOfBooks = 20;
-
+    public static Book[] inventory = new Book[20];
 
     public static void main(String[] args) {
         String[] books = {"1|9798581484234|The Great Gatsby by F. Scott Fitzgerald",
@@ -28,10 +28,22 @@ public class NeighborhoodLibrary {
                 "19|9798500248923|The Count of Monte Cristo by Alexandre Dumas",
                 "20|9798448482212|The Adventures of Huckleberry Finn  by Mark Twain"};
 
+
                 Scanner scanner = new Scanner(System.in);
 
         try {
-            boolean isDone = false;
+            Book[] inventory = new Book[books.length];
+            for (int i = 0; i < books.length; i++){
+                String[] parts = books[i].split("\\|");
+            int id = Integer.parseInt(parts[0]);
+            String isbn = parts[1];
+            String title = parts[2];
+
+            inventory[i] = new Book(id, isbn, title, false, "");
+        }
+
+
+                boolean isDone = false;
             while(!isDone){
                 System.out.println("=====Home Screen=====");
                 System.out.println("What would you like to do:");
@@ -43,7 +55,7 @@ public class NeighborhoodLibrary {
 
                 switch (choice){
                     case 1:
-                        showAvailableBooks();
+                        showAvailableBooks(inventory);
                         break;
                     case 2:
                         showCheckedOutBooks();
@@ -54,18 +66,24 @@ public class NeighborhoodLibrary {
                         break;
                 }
 
+                    
+
+
 
             }
 
         } catch (Exception e){
-            System.out.println("Something went wrong");
+            System.out.println(e);
         }
 
 
-
-
     }
-    public static void showAvailableBooks(){
+    public static void showAvailableBooks(Book[]inventory ){
+        for (Book book : inventory) {
+            if (!book.isCheckedOut()) {
+                System.out.println(book.getId() + " | " + book.getIsbn() + " | " + book.getTitle());
+            }
+        }
 
 
     }
