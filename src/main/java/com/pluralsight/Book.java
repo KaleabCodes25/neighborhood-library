@@ -75,6 +75,7 @@ public class Book {
         //when its checked in
         checkedOutTo = "";
         isCheckedOut = false;
+
     }
 }
 

@@ -78,15 +78,17 @@ public class NeighborhoodLibrary {
     // Display all the books and check out one if needed
     public static void showAvailableBooks(Book[] inventory, Scanner scanner) {
         System.out.println("===== Available Books ======");
-
+        System.out.printf(" Id         ISBN      Title");
+        System.out.println();
         for (Book book : inventory) {
             if (!book.isCheckedOut()) {
-                System.out.println(book.getId() + " | " + book.getIsbn() + " | " + book.getTitle());
+                System.out.println(book.getId() + "    " + book.getIsbn() + "    " + book.getTitle());
             }
         }
 
         System.out.print("Enter a book Id to check out (X to return): ");
         String input = scanner.nextLine();
+        System.out.println();
 
         if (input.equalsIgnoreCase("X")) {
             return;
@@ -110,7 +112,7 @@ public class NeighborhoodLibrary {
                 }
 
                 book.checkOut(name);
-                System.out.println("Book checked out successfully!");
+                System.out.println("Book is checked out successfully!");
                 return;
             }
         }
@@ -123,17 +125,17 @@ public class NeighborhoodLibrary {
 
         System.out.println("===== Checked-Out Books =====");
 
-        boolean foundBook = false;
+        boolean bookFound = false;
 
         for (Book book : inventory) {
 
             if (book.isCheckedOut()) {
 
-                System.out.println(book.getId() + " | " + book.getIsbn() + " | " + book.getTitle() + " | Checked out to: " + book.getCheckedOutTo());foundBook = true;
+                System.out.println(book.getId() + " | " + book.getIsbn() + " | " + book.getTitle() + " | Checked out to: " + book.getCheckedOutTo());bookFound = true;
             }
         }
 
-        if (!foundBook) {
+        if (!bookFound) {
             System.out.println("No books are currently checked out.");
             return;
         }
