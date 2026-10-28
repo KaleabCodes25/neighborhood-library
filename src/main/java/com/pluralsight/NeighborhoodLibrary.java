@@ -96,7 +96,6 @@ public class NeighborhoodLibrary {
 
         int id;
         id = Integer.parseInt(input);
-        scanner.nextLine();
 
         // look for your book
         for (Book book : inventory) {
