@@ -56,6 +56,7 @@ public class Book {
     }
 
     public void checkOut(String name){
+        System.out.println();
 
     }
 
