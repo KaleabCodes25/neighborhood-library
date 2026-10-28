@@ -15,6 +15,17 @@ public class Book {
         this.checkedOutTo = checkedOutTo;
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", isCheckedOut=" + isCheckedOut +
+                ", checkedOutTo='" + checkedOutTo + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
@@ -56,18 +67,14 @@ public class Book {
     }
 
     public void checkOut(String name){
-        System.out.println();
-
+        // who checkt it out
+        checkedOutTo = name;
+        isCheckedOut = true;
     }
-
     public void checkIn(){
-        if (isCheckedOut) {
-            isCheckedOut = false;
-            checkedOutTo = "";
-            System.out.println(title + " has been checked in.");
-        } else {
-            System.out.println(title + " is not checked out.");}
-
+        //when its checked in
+        checkedOutTo = "";
+        isCheckedOut = false;
     }
 }
 
