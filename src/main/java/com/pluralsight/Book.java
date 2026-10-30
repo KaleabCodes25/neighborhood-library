@@ -67,7 +67,7 @@ public class Book {
     }
 
     public void checkOut(String name){
-        // who checkt it out
+        // who checked it out
         checkedOutTo = name;
         isCheckedOut = true;
     }

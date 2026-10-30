@@ -80,42 +80,43 @@ public class NeighborhoodLibrary {
         System.out.println("===== Available Books ======");
         System.out.printf(" Id         ISBN      Title");
         System.out.println();
+        // for loop to go through every book in inventory, if it is not checked out, we print it on the screen.
         for (Book book : inventory) {
             if (!book.isCheckedOut()) {
                 System.out.println(book.getId() + "    " + book.getIsbn() + "    " + book.getTitle());
             }
         }
-
+          // then ask if the user wants to check out a book or return to the menu.
         System.out.print("Enter a book Id to check out (X to return): ");
         String input = scanner.nextLine();
         System.out.println();
-
+         // if the answer is X, we return
         if (input.equalsIgnoreCase("X")) {
             return;
         }
-
+          // if they enter the book id instead, we save it to a variable.
         int id;
         id = Integer.parseInt(input);
 
         // look for your book
         for (Book book : inventory) {
-
+         // if the book id matches books in the inventory and this particular book isn't checked out, we ask for a name and save the name.
             if (book.getId() == id && !book.isCheckedOut()) {
 
                 System.out.print("Enter your name: ");
                 String name = scanner.nextLine().trim();
-
+                ///if the name is empty,we show this message, then return.
                 if (name.isEmpty()) {
                     System.out.println("Name cannot be empty.");
                     return;
                 }
-
+               //if they enter their name correctly, then we save the name, and we print this message.
                 book.checkOut(name);
                 System.out.println("Book is checked out successfully!");
                 return;
             }
         }
-
+        // this prints out if the pervious conditions aren't met.
         System.out.println("Book not found or already checked out.");
     }
 
@@ -127,54 +128,55 @@ public class NeighborhoodLibrary {
         boolean bookFound = false;
 
         for (Book book : inventory) {
-
+            // id the book is checked out, this follows.
             if (book.isCheckedOut()) {
-
+              // print that shows the info of the book and the person that checked it out.
                 System.out.println(book.getId() + " | " + book.getIsbn() + " | " + book.getTitle() + " | Checked out to: " + book.getCheckedOutTo());bookFound = true;
             }
         }
-
+        // if bookfound is true, then this if statement runs and prints this message.
         if (!bookFound) {
             System.out.println("No books are currently checked out.");
             return;
         }
-
+           // then print this message after to see what to do.
         System.out.println("C - Check in a book");
         System.out.println("X - Return to home screen");
         System.out.print("Choose an option: ");
-
+         // save the choice.
         String choice = scanner.nextLine();
-
+        // then another if condition
         if (choice.equalsIgnoreCase("X")) {
             return;
         }
-
+         // if they choose C, then check the id of the book they want to return.
         if (choice.equalsIgnoreCase("C")) {
 
             System.out.print("Enter the ID of the book to check in: ");
             String input = scanner.nextLine();
+            //save the input in int variable
             int id;
-
+            // parse it to integer
             try {
                 id = Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid book ID.");
                 return;
             }
-
+            // another loop, to check in the books.
             for (Book book : inventory) {
-
+                 // if the book id == the input id AND the book is checked out then.
                 if (book.getId() == id && book.isCheckedOut()) {
-
+                    // then we call this method, to make the checkedout false.
                     book.checkIn();
-
+                    // then print this.
                     System.out.println("Book checked in successfully!");
                     return;
                 }
             }
-
+             // if the book id is not a match, then print this
             System.out.println("No checked-out book found with that ID.");
-
+         // for anything else, print this
         } else {
             System.out.println("Invalid option.");
         }
